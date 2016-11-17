@@ -1,0 +1,14 @@
+{
+  "name": "npm-downloader",
+  "version": "1.0.0",
+  "description": "Download a list of npm modules",
+  "main": "index.js",
+  "scripts": {
+    "test": "tape"
+  },
+  "author": "Mark Robson",
+  "license": "MIT",
+  "dependencies": {
+    "request": "^2.78.0"
+  }
+}
