@@ -4,11 +4,15 @@
   "description": "Download a list of npm modules",
   "main": "index.js",
   "scripts": {
-    "test": "tape"
+    "test": "tape test/**/*.js"
   },
   "author": "Mark Robson",
   "license": "MIT",
   "dependencies": {
     "request": "^2.78.0"
+  },
+  "devDependencies": {
+    "nock": "^9.0.2",
+    "tape": "^4.6.3"
   }
 }

@@ -1,19 +1,21 @@
 # NPM module downloader
 
-Download a list of npm modules to use offline.
+Download a list of npm modules to use offline - our use is on a server that has no outside connection so we are setting up artifactory.
 
-//if we already have a .tgz uri
- //just download and reurn promise
-//otherwise spawn and get uri from npm
-  //download and return promise
-
-To get a list of modules used in your app run:
+First things first, to get a list of modules used in your app run:
 
 ```
-npm ls --json
+npm ls --json > packages.json
 ```
 
-Then traverse your JSON object and create an array of modules. Make sure to include the @version
+Then traverse your JSON object and create an array of modules.
+
+## Running
+
+```
+let dn = require('.');
+dn('./downloads', ['wordify', 'elasticsearch-synonyms']);
+```
 
 ## References
 
