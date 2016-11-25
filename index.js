@@ -1,7 +1,7 @@
 'use strict';
 
-const spawn = require('child_process').spawn;
-const fs = require('fs');
+let fs = require('fs');
+let spawn = require('child_process').spawn;
 const request = require('request');
 
 /**
@@ -20,8 +20,9 @@ function downloadUri(path, uri) {
 
       request
         .get(uri)
-        .on('error', error => resolve({ errors: [`${uri}: ${error.message}`] }))
-        .pipe(output);
+        .on('error', error => {
+          throw error;
+        }).pipe(output);
 
       output.on('finish', () => resolve({ success: [uri] }));
 
@@ -39,13 +40,11 @@ function downloadUri(path, uri) {
  * @param {string} pkg package name, name@version, or url
  * @return {promise}
  */
-function getPackage(path, pkg) {
+function getNpmPackage(path, pkg) {
 
   return new Promise((resolve, reject) => {
 
-    let report = {
-      errors: [],
-    };
+    let errors = [];
 
     if (~pkg.indexOf('.tgz')) {
       return downloadUri(path, pkg)
@@ -65,13 +64,13 @@ function getPackage(path, pkg) {
     });
 
     url.stderr.on('data', data => {
-      report.errors.push(data.toString());
+      errors.push(data.toString());
     });
 
+    //should be 0 if all OK
     url.on('close', code => {
       if (code) {
-        report.errors = [report.errors.join('')];
-        resolve(report);
+        resolve({ errors: [errors.join('')] });
       }
     });
 
@@ -91,7 +90,7 @@ function downloadList(path, packages) {
     errors: [],
   };
 
-  return packages.reduce((curr, next) => curr.then(() => getPackage(path, next.trim())
+  return packages.reduce((curr, next) => curr.then(() => getNpmPackage(path, next.trim())
       .then(result => {
         if (result && result.errors) {
           return report.errors = report.errors.concat(result.errors);

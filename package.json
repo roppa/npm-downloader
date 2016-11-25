@@ -4,6 +4,7 @@
   "description": "Download a list of npm modules",
   "main": "index.js",
   "scripts": {
+    "watch": "watch 'npm run test' test",
     "test": "tape test/**/*.js"
   },
   "author": "Mark Robson",
@@ -12,7 +13,11 @@
     "request": "^2.78.0"
   },
   "devDependencies": {
+    "mock-spawn": "^0.2.6",
     "nock": "^9.0.2",
-    "tape": "^4.6.3"
+    "rewire": "^2.5.2",
+    "tape": "^4.6.3",
+    "through2": "^2.0.1",
+    "watch": "^1.0.1"
   }
 }
