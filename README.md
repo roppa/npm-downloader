@@ -1,6 +1,6 @@
 # NPM module downloader
 
-https://travis-ci.org/roppa/npm-downloader.svg?branch=master
+[![Build Status](https://travis-ci.org/roppa/npm-downloader.svg?branch=master)](https://travis-ci.org/roppa/npm-downloader)
 
 Download a list of npm modules to use offline. My use case was for use on a server that has no outside connection so need to import modules into artifactory. The list can either be the url to the tarball (.tgz), the name, or the name@version of the module.
 
