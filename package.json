@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Download a list of npm modules",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/roppa/npm-downloader.git"
+  },
   "scripts": {
     "watch": "watch 'npm run test' test",
     "test": "tape test/**/*.js"
